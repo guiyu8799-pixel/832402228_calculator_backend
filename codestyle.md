@@ -33,7 +33,7 @@
 
 ## 1. 适用范围
 
-适用于 `calculator_backend` 仓库中的全部 Java 源码、测试代码与配置文件。
+适用于 `832402228_calculator_backend` 仓库中的全部 Java 源码、测试代码与配置文件。
 
 ## 2. 文件与包结构
 

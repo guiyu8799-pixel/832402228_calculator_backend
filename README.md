@@ -71,8 +71,8 @@ Verify with `java -version` and `mvn -v`.
 ## 4. Installation
 
 ```bash
-git clone <backend-repository-url>
-cd <StudentID>_calculator_backend
+git clone https://github.com/guiyu8799-pixel/832402228_calculator_backend.git
+cd 832402228_calculator_backend
 
 # Download dependencies and produce target/calculator-backend-1.0.0.jar
 mvn clean package
@@ -264,7 +264,7 @@ The tests write their database to `target/test-data/` and never touch `data/calc
 ## 11. Project structure
 
 ```text
-calculator_backend/
+832402228_calculator_backend/
 ├── src/
 │   ├── main/
 │   │   ├── java/com/fzu/calculator/
