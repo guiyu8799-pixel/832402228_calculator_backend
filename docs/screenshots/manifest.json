@@ -1,0 +1,62 @@
+[
+  {
+    "file": "01-main-interface.png",
+    "label": "主界面：打开页面后自动从后端数据库加载计算历史"
+  },
+  {
+    "file": "02-addition-keypad.png",
+    "label": "加法 12+8 = 20：使用屏幕按键逐个输入后点击 =，结果由后端返回"
+  },
+  {
+    "file": "03-subtraction.png",
+    "label": "减法 9-4 = 5"
+  },
+  {
+    "file": "04-multiplication.png",
+    "label": "乘法 6*7 = 42（界面按钮显示 ×，前端发送 * 给后端）"
+  },
+  {
+    "file": "05-division.png",
+    "label": "除法 20/4 = 5（界面按钮显示 ÷，前端发送 / 给后端）"
+  },
+  {
+    "file": "06-decimal.png",
+    "label": "小数运算 0.1+0.2 = 0.3：后端使用 BigDecimal，避免浮点误差"
+  },
+  {
+    "file": "07-operator-precedence.png",
+    "label": "复合表达式 1+2*3 = 7：先乘除后加减"
+  },
+  {
+    "file": "08-parentheses.png",
+    "label": "括号 (1+2)*3 = 9：括号改变运算优先级"
+  },
+  {
+    "file": "09-unary-minus.png",
+    "label": "一元负号 3*-2 = -6"
+  },
+  {
+    "file": "10-invalid-expression.png",
+    "label": "非法表达式 1+*2：后端返回 HTTP 400，前端以红色文字显示后端给出的原因"
+  },
+  {
+    "file": "11-division-by-zero.png",
+    "label": "除零错误 1/0：后端返回 DIVISION_BY_ZERO"
+  },
+  {
+    "file": "12-history-list.png",
+    "label": "计算历史：表达式、结果与时间全部来自后端数据库"
+  },
+  {
+    "file": "13-history-persistence.png",
+    "label": "刷新页面后历史仍然存在：数据来自后端 SQLite 数据库，而非前端缓存"
+  },
+  {
+    "file": "14-delete-record.png",
+    "label": "删除指定历史记录：前端调用 DELETE /api/history/{id}，后端删除数据库行后前端重新查询历史"
+  },
+  {
+    "file": "15-backend-offline-no-result.png",
+    "label": "前后端分离验证：后端停止时前端仍可输入，但按 = 无法得到结果，只能显示请求失败"
+  }
+]
