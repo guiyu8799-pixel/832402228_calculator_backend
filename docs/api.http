@@ -1,0 +1,189 @@
+### Calculator backend API request collection
+###
+### Runnable from VS Code (REST Client), IntelliJ IDEA (HTTP Client) or JetBrains Gateway.
+### Start the service first:  java -jar target/calculator-backend-1.0.0.jar
+###
+### Each block is separated by "###" and can be executed individually.
+
+@host = http://localhost:8080
+@json = application/json
+
+### ---------------------------------------------------------------------------
+### Health check
+### ---------------------------------------------------------------------------
+
+# @name health
+GET {{host}}/api/health
+
+### ---------------------------------------------------------------------------
+### Function 1 - basic calculation
+### ---------------------------------------------------------------------------
+
+# 12 + 8 = 20
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "12+8"
+}
+
+### 9 - 4 = 5
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "9-4"
+}
+
+### 6 × 7 = 42  (the front end displays "×", the API also accepts it)
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "6×7"
+}
+
+### 20 ÷ 4 = 5
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "20/4"
+}
+
+### ---------------------------------------------------------------------------
+### Function 2 - compound expressions
+### ---------------------------------------------------------------------------
+
+### operator precedence: 1 + 2 * 3 = 7
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "1+2*3"
+}
+
+### parentheses: (1 + 2) * 3 = 9
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "(1+2)*3"
+}
+
+### mixed: 10 / 2 + 7 = 12
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "10/2+7"
+}
+
+### unary minus: -5 + 8 = 3
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "-5+8"
+}
+
+### unary minus after an operator: 3 * -2 = -6
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "3*-2"
+}
+
+### decimals: 0.1 + 0.2 = 0.3 (exact decimal arithmetic)
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "0.1+0.2"
+}
+
+### decimals: 1.5 + 2.25 = 3.75
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "1.5+2.25"
+}
+
+### decimals: 7 / 2 = 3.5
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "7/2"
+}
+
+### ---------------------------------------------------------------------------
+### Exception handling
+### ---------------------------------------------------------------------------
+
+### division by zero -> 400 DIVISION_BY_ZERO
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "1/0"
+}
+
+### division by zero through an expression -> 400 DIVISION_BY_ZERO
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "5/(3-3)"
+}
+
+### malformed expression -> 400 INVALID_EXPRESSION
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "1+*2"
+}
+
+### missing closing parenthesis -> 400 INVALID_EXPRESSION
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "(1+2"
+}
+
+### unsupported character -> 400 INVALID_EXPRESSION
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "1+2@3"
+}
+
+### empty expression -> 400 EMPTY_EXPRESSION
+POST {{host}}/api/calculate
+Content-Type: {{json}}
+
+{
+  "expression": "   "
+}
+
+### ---------------------------------------------------------------------------
+### Function 3 - calculation history
+### ---------------------------------------------------------------------------
+
+### the whole history, newest first
+GET {{host}}/api/history
+
+### ---------------------------------------------------------------------------
+### Function 4 - delete history
+### ---------------------------------------------------------------------------
+
+### delete one record; replace 1 with an id returned by the history request above
+DELETE {{host}}/api/history/1
+
+### deleting an unknown id -> 404 NOT_FOUND
+DELETE {{host}}/api/history/999999
