@@ -1,0 +1,39 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  application:
+    name: calculator-backend
+  datasource:
+    url: jdbc:sqlite:${app.database.path}
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    # Hibernate 5.6 does not ship a SQLite dialect; the one provided by the
+    # com.github.gwenn:sqlite-dialect dependency lives in the org.sqlite.hibernate.dialect
+    # package. Pointing at org.hibernate.dialect.SQLiteDialect would fail at startup.
+    database-platform: org.sqlite.hibernate.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: GMT+8
+
+app:
+  database:
+    # Relative paths are resolved against the working directory where the jar is started.
+    path: ./data/calculator.db
+  cors:
+    # Comma separated list of allowed origins, "*" means allow every origin (development default).
+    allowed-origins: "*"
+
+logging:
+  level:
+    root: INFO
+    com.fzu.calculator: INFO
