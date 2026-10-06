@@ -1,0 +1,30 @@
+# Normalise line endings so that the Java sources, Markdown and configuration files behave the
+# same on Windows, Linux and macOS.
+* text=auto eol=lf
+
+# Windows-only scripts must keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Shell scripts must keep LF.
+*.sh text eol=lf
+
+# Binary assets are never converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.jar binary
+*.db binary
+*.zip binary
+
+# Keep the generated SQLite database and build output out of diffs.
+target/** -text
+data/** -text
+
+# Make the GitHub / Gitee language statistics sensible for a documentation-heavy repository.
+docs/screenshots/** linguist-documentation
+*.md linguist-documentation
